@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Impact", "Haettenschweiler", "Arial Narrow Bold", sans-serif;
+  --color-cimua-pink: #f0a6ca;
+  --color-cimua-blue: #63b3ed;
+  --background-image-cimua-gradient: linear-gradient(to right, #f0a6ca, #63b3ed);
+}
+
+/* ESTO ARREGLA EL ACOMODO DE LAS FOTOS */
+@utility grid-cols-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-bottom: 80px;
+}
+
+@layer base {
+  body {
+    @apply bg-black text-white;
+    margin: 0;
+  }
+  
+  /* Arreglo para que el texto FESTIVAL sea gigante y no se rompa */
+  h1, h2 {
+    font-family: "Impact", sans-serif;
+  }
+}
+
+/* Clases manuales por si Tailwind falla */
+.bg-cimua-gradient { background: linear-gradient(90deg, #f0a6ca 0%, #63b3ed 100%); }
+.bg-pink-gradient { background: #f0a6ca; }
+.bg-cimua-gradient {
+  background: linear-gradient(90deg, #f0a6ca 0%, #63b3ed 100%);
+}
+/* Esto "enciende" el color de los círculos del calendario */
+.bg-cimua-gradient {
+  background: linear-gradient(90deg, #f0a6ca 0%, #63b3ed 100%) !important;
+}
+
+/* Opcional: añade un brillo extra a los días del festival */
+.bg-cimua-gradient {
+  box-shadow: 0 0 15px rgba(240, 166, 202, 0.5);
+}
