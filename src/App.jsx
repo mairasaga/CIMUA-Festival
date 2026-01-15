@@ -1,10 +1,11 @@
 
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { Menu, X, ChevronLeft, ChevronRight, Calendar as CalendarIcon, MapPin } from 'lucide-react';
 
 const CIMUA_PINK = "#f0a6ca";
 const CIMUA_BLUE = "#63b3ed";
+
 
 const WORKS = [
   { id: 1, title: 'ESCUCHANDO ROCAS', img: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?q=80&w=800&auto=format&fit=crop', color: 'bg-blue-500/40' },
@@ -107,6 +108,9 @@ const App = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [galleryIndex, setGalleryIndex] = useState(0);
 
+  const { scrollYProgress } = useScroll(); 
+  const yPos = useTransform(scrollYProgress, [0, 600], [0, -300]);
+
   const scrollToSection = (id) => {
     setMobileMenuOpen(false);
     const element = document.getElementById(id);
@@ -120,12 +124,76 @@ const App = () => {
 
   return (
     <div className="min-h-screen bg-black selection:bg-pink-500 selection:text-white">
+      {/* Nueva Sección de Introducción CIMUA */}
+<section style={{ 
+  display: 'flex', 
+  backgroundColor: '#000', 
+  color: '#fff', 
+  minHeight: '110vh',
+  alignItems: 'center',
+  justifyContent: 'center',
+  flexWrap: 'wrap',
+  paddingRight: '5%' 
+  
+}}>
+  {/* Contenedor de la Imagen */}
+  <div style={{ flex: '1.2', minWidth: '300px', height: '90vh', overflow: 'hidden' }}>
+    <motion.img 
+      src="/cimua_assets/grainy girl_02.png" 
+      alt="CIMUA Festival" 
+
+      animate={{ 
+    y: [-200, -220, -200], // Sube y baja 40px solo
+    x: [0, -60, 0]  // Se mueve de lado 20px
+  }}
+  transition={{ 
+    duration: 6, // Movimiento lento de 8 segundos
+    repeat: Infinity, 
+    ease: "easeInOut" 
+  }}
+      style={{ width: '160%',
+      height: '120vh',
+      objectFit: 'cover',
+     position: 'absolute',
+    top:0 }} 
+    />
+  </div>
+
+  {/* Contenedor del Texto Azul */}
+  <div style={{ 
+  flex: '1.5', 
+  backgroundColor: '#5D83B1', 
+  padding: '60px 50px', 
+  minWidth: '400px',
+  maxWidth: '900px',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  alignItems: 'center',
+  textAlign: 'center',
+  minHeight: '70vh',
+  zIndex: '1'
+  }}>
+    <p style={{ fontSize: '2.8rem',
+       lineHeight: '1.1',
+        marginBottom: '40px', 
+        fontWeight: '400', 
+        maxWidth: '600px', 
+        }}>
+      <strong style={{ fontWeight: '800' }}>CIMUA</strong> / Cine, Música y Audiovisual se lleva a cabo en Ciudad de México del 3 al 12 de Agosto de 2026.
+    </p>
+    <p style={{ fontSize: '2rem', lineHeight: '1.3',maxWidth: '500px', fontWeight: '350' }}>
+      Disfruta de distintas locaciones como cines, jardines, cafeterías en el centro de la ciudad.
+    </p>
+  </div>
+</section>
+
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-md px-6 py-6 border-b border-white/5">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="font-display text-2xl tracking-tighter">CIMUA</div>
+          <div className="font-display text-5xl tracking-tighter">CIMUA</div>
           
-          <div className="hidden md:flex gap-12 text-[10px] font-bold tracking-[0.2em] uppercase">
+          <div className="hidden md:flex gap-12 text-base font-normal tracking-[0.2em] uppercase">
             {['Festival', 'Nosotrxs', 'Calendario', 'Media'].map((item) => (
               <button 
                 key={item} 
