@@ -125,73 +125,86 @@ const App = () => {
       });
     }
   };
-
+const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
   return (
     <div className="min-h-screen bg-black selection:bg-pink-500 selection:text-white">
       
       {/* Nueva Sección de Introducción CIMUA */}
 <section id="festival" style={{ 
   display: 'flex', 
+  flexDirection: 'column',
   backgroundColor: '#000', 
   color: '#fff', 
   minHeight: '110vh',
   alignItems: 'center',
   justifyContent: 'center',
+  position: 'relative',
+  overflow: 'hidden',
   flexWrap: 'wrap',
-  paddingRight: '5%' 
+  paddingRight: '0 5% 0 0',
+  
   
 }}>
   {/* Contenedor de la Imagen */}
-  <div style={{ flex: '1.2', minWidth: '300px', height: '90vh', overflow: 'hidden' }}>
+  <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', overflow: 'hidden', zIndex: 1 }}>
     <motion.img 
       src="/cimua_assets/grainy girl_02.png" 
       alt="CIMUA Festival" 
 
       animate={{ 
     y: [-200, -220, -200], // Sube y baja 40px solo
-    x: [0, -60, 0]  // Se mueve de lado 20px
+    x: [0, 0, 0]  // Se mueve de lado 0px
   }}
   transition={{ 
     duration: 6, // Movimiento lento de 8 segundos
     repeat: Infinity, 
     ease: "easeInOut" 
   }}
-      style={{ width: '160%',
-      height: '120vh',
+      style={{ width: '100%',
+      height: '130vh',
       objectFit: 'cover',
      position: 'absolute',
     top:0,
-    left:'-10%',
+    left:'0%',
     display: 'block'
     }} 
     />
   </div>
 
   {/* Contenedor del Glass */}
-  <div style={{ 
-  flex: '1', 
-  backgroundColor: 'rgba(30, 144, 255, 0.25)', 
-  backdropFilter: 'blur(12px)',
-  WebkitBackdropFilter: 'blur(12px)',
-  border: '1px solid rgba(30, 144, 255, 0.25)',
-  padding: '60px 50px', 
-  minWidth: '400px',
-  maxWidth: '900px',
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'center',
-  alignItems: 'center',
-  textAlign: 'center',
-  minHeight: '70vh',
-  zIndex: '10',
-  marginLeft: '-80px'
- }}>
+<div 
+  // Usamos className para el margen responsivo
+  // mx-auto: centra en móvil
+  // md:mr-[15%]: aplica el margen del 15% solo en PC
+  // md:ml-auto: mantiene el empuje desde la izquierda en PC
+  className="mx-auto md:ml-auto md:mr-[18%]" 
+  style={{ 
+    position: 'relative',
+    zIndex: 2,
+    backgroundColor: 'rgba(30, 144, 255, 0.25)', 
+    backdropFilter: 'blur(12px)',
+    WebkitBackdropFilter: 'blur(12px)',
+    border: '1px solid rgba(255, 255, 255, 0.1)',
+    padding: '30px 40px', 
+    width: '90%', 
+    maxWidth: '500px', 
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    textAlign: 'center',
+    borderRadius: '10px',
+    // Quitamos los márgenes de aquí para que mande el className de arriba
+    marginTop: '10vh' 
+  }}
+>
+
     {/* Título con Fechas Actualizadas */}
     <p style={{ 
-      fontSize: '2.8rem',
+      fontSize: '2.6rem',
       lineHeight: '1.1',
       marginBottom: '40px', 
-      fontWeight: '400', 
+      fontWeight: '300', 
       maxWidth: '600px', 
     }}>
       <strong style={{ fontWeight: '800' }}>CIMUA</strong> / Cine, Música y Audiovisual se lleva a cabo en Ciudad de México del <span style={{ fontWeight: '700' }}>22 al 26 de Septiembre</span> de 2026.
@@ -209,56 +222,8 @@ const App = () => {
     </p>
   </div>
 </section>
-    {/* Nosotrxs Section */}
-<section id="nosotrxs" className="py-24 px-20">
-  {/* Ajustamos el contenedor al mismo ancho que tus fotos de arriba */}
-  <div className="w-full px-20 mx-auto"> 
-    
-    <div className="grid grid-cols-1 lg:grid-cols-[0.8fr_0.45fr] gap-12 items-start">
-      
-      {/* Columna Izquierda: Título + Texto */}
-      <div className="space-y-12">
-        <h2 className="text-[12vw] md:text-[13vw] font-display uppercase leading-[0.7] tracking-tighter break-words max-w-full">
-          NOSOTRXS
-        </h2>
-        
-        <div className="bg-[#e4a5c5] p-16 md:p-24 lg:p-32 min-h-[550px] flex flex-col justify-center text-black">
-          <p className="text-xl md:text-2xl font-light leading-relaxed mb-12">
-            <strong className="font-black">CIMUA</strong> es un festival que reúne artistas, creadores y emergentes para ampliar la visión creativa de la música, el cine y proyectos audiovisuales en un mismo lugar.
-          </p>
-          
-          {/* FRASE RESALTADA COMO EN LA IMAGEN */}
-          <p className="text-lg">
-            <span style={{ 
-              backgroundColor: '#E6007Eca', // El rosa CIMUA de tu paleta
-              color: '#fff',            // Letras blancas
-              padding: '4px 8px',       // Espacio alrededor del texto para que parezca marca-textos
-              fontWeight: '400',
-              display: 'inline-block',  // Para que el fondo cubra bien la frase
-              lineHeight: '1.4'
-            }}>
-              Un espacio para hacer comunidad, guardar recuerdos y compartir experiencias.
-            </span>
-          </p>
-        </div>
-      </div>
-      
-      {/* Columna Derecha: Foto (ahora subirá al nivel del título) */}
-      <div className="relative aspect-[3/4] overflow-hidden bg-white mt-4 md:mt-0">
-        <img 
-          src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=1000&auto=format&fit=crop" 
-          className="w-full h-full object-cover grayscale brightness-125 contrast-150" 
-          alt="Artist" 
-        />
-        <div className="absolute inset-0 bg-black/10 mix-blend-multiply" />
-      </div>
-
-    </div>
-  </div>
-</section>
-
 {/* --- MARQUEE BLANCO (SOLO UNO) --- */}
-<div className="bg-white text-black py-4 overflow-hidden border-y border-black mt-12 mb-12">
+<div className="bg-white text-black py-4 overflow-hidden border-y border-black mt0 mb-12">
   <motion.div
     className="flex whitespace-nowrap"
     animate={{ x: [0, -1000] }}
@@ -272,16 +237,68 @@ const App = () => {
     ))}
   </motion.div>
 </div>
+   {/* Nosotrxs Section */}
+<section id="nosotrxs" className="pt-24 pb-10 px-6 md:px-20 bg-black overflow-hidden"> 
+  <div className="w-full max-w-7xl mx-auto"> 
+    
+    {/* Título: Estirado de orilla a orilla */}
+    <h2 style={{ 
+      fontSize: '11vw', // Manteniendo el tamaño imponente que ya tenías
+      lineHeight: '.5',
+      display: 'flex',
+      justifyContent: 'space-between', // ESTO ESTIRA LAS LETRAS AL ANCHO TOTAL
+      width: '100%',
+      marginBottom: isMobile ? '60px' : '120px', 
+  marginTop: '10px',
+      marginRight: '-1em' // Compensa el espacio de la última letra si es necesario
+    }} 
+    className="font-display uppercase mb-8 text-white">
+      {"NOSOTRXS".split("").map((letra, index) => (
+        <span key={index}>{letra}</span>
+      ))}
+    </h2>
+
+    {/* Grid equilibrado */}
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-stretch">
+      
+      {/* Columna Izquierda: Caja Rosa */}
+      <div className="flex flex-col">
+        <div className="bg-[#e4a5c5] p-10 md:p-16 flex flex-col justify-center text-black h-full rounded-[10px]">
+          <p className="text-xl md:text-2xl lg:text-3xl font-light leading-tight mb-10">
+            <strong className="font-black">CIMUA</strong> es un festival que reúne artistas, creadores y emergentes para ampliar la visión creativa de la música, el cine y proyectos audiovisuales en un mismo lugar.
+          </p>
+          
+          <p className="text-base md:text-lg">
+            <span className="bg-[#E6007E] text-white px-4 py-2 font-medium inline-block rounded-sm">
+              Un espacio para hacer comunidad, guardar recuerdos y compartir experiencias.
+            </span>
+          </p>
+        </div>
+      </div>
+      
+      {/* Columna Derecha: Imagen */}
+      <div className="relative w-full h-[400px] lg:h-auto overflow-hidden bg-zinc-900 rounded-[10px]">
+        <img 
+          src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=1000&auto=format&fit=crop" 
+          className="w-full h-full object-cover grayscale brightness-110 contrast-125 hover:scale-105 transition-transform duration-700" 
+          alt="Artist CIMUA" 
+        />
+        <div className="absolute inset-0 bg-[#E6007E]/5 mix-blend-multiply" />
+      </div>
+
+    </div>
+  </div>
+</section>
 
       {/* Calendario Section */}
-      <section id="calendario" className="py-24 bg-black">
+      <section id="calendario" className="py 0 bg-black">
         <Calendar />
       </section>
       
 {/* --- SECCIÓN CONVOCATORIA --- */}
 <section id="convocatoria" style={{ 
   width: '100%',
-  height: '100vh', // Misma altura que la intro para mantener el ritmo
+  height: '100vh', 
   position: 'relative',
   overflow: 'hidden',
   backgroundColor: '#000',
@@ -292,7 +309,7 @@ const App = () => {
 }}>
   {/* La Imagen de Fondo */}
   <img 
-    src="/cimua_assets/backgorund2k_.png" // <--- Cambia esto por el nombre de tu foto
+    src="/cimua_assets/backgorund2k_.png" 
     alt="Convocatoria CIMUA"
     style={{
       position: 'absolute',
@@ -301,49 +318,55 @@ const App = () => {
       width: '100%',
       height: '100%',
       objectFit: 'cover',
-      opacity: '0.66' // Bajamos la opacidad para que el texto se lea bien
+      opacity: '0.66' 
     }}
   />
   
-  {/* El Contenido encima de la imagen */}
   <motion.div
     initial={{ opacity: 0 }}
     whileInView={{ opacity: 1 }}
     transition={{ duration: 1 }}
     style={{
-      position: 'relative', // Para que flote sobre la imagen
+      position: 'relative', 
       zIndex: 2,
       textAlign: 'center',
-      padding: '0 20px'
+      padding: '0 20px',
+      width: '100%', // Asegura que el contenedor no mida más que la pantalla
+      boxSizing: 'border-box'
     }}
   >
     <h2 style={{ 
       color: '#fff', 
-      fontSize: 'clamp(3rem, 10vw, 6rem)', 
+      // Ajustamos el clamp: el mínimo ahora es 1.8rem para que quepa en móviles pequeños
+      fontSize: 'clamp(1.8rem, 8vw, 6rem)', 
       fontWeight: '200',
       textTransform: 'uppercase', 
-      letterSpacing: '0.2em',
+      // Bajamos el letterSpacing en móvil para que no desborde
+      letterSpacing: '0.1em', 
       margin: '0 0 30px 0',
-      textAlign: 'center'
+      textAlign: 'center',
+      wordWrap: 'break-word' // Si aun así no cabe, la palabra se corta
     }}>
       CONVOCATORIA 2026
     </h2>
     
-  <p style={{ 
-  color: '#ccc', 
-  maxWidth: '700px', 
-  fontSize: '1.5rem', 
-  lineHeight: '1.6',
-  marginBottom: '40px',
-  textAlign: 'center', // <--- ESTO centra las líneas de texto
-  marginLeft: 'auto',   // <--- ESTO centra el bloque completo
-  marginRight: 'auto'   // <--- ESTO centra el bloque completo
-}}>
-  Forma parte del festival más importante de artes visuales. 
-  <br /> {/* Opcional: un salto de línea para mejor ritmo */}
-  Buscamos creadores que desafíen los límites de la imagen.
-</p>
-{/* BOTÓN ACTUALIZADO CON LINK Y ESTILO FESTIVAL */}
+    <p style={{ 
+      color: '#ccc', 
+      maxWidth: '700px', 
+      // Ajustamos el tamaño del texto para móvil usando clamp
+      fontSize: 'clamp(1rem, 4vw, 1.5rem)', 
+      lineHeight: '1.6',
+      marginBottom: '40px',
+      textAlign: 'center', 
+      marginLeft: 'auto',   
+      marginRight: 'auto',
+      wordBreak: 'break-word' // Evita que el texto empuje hacia la derecha
+    }}>
+      Forma parte del festival más importante de artes visuales. 
+      <br className="hidden md:block" /> {/* Solo salta línea en PC */}
+      Buscamos creadores que desafíen los límites de la imagen.
+    </p>
+
     <a 
       href="https://drive.google.com/file/d/1JIPUwelUgeZI0sRDz5LWzeMSN-Uo2sn_/view?usp=drivesdk" 
       target="_blank" 
@@ -353,7 +376,7 @@ const App = () => {
       <motion.button 
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        className="px-12 py-4 bg-pink-gradient rounded-full text-black font-bold uppercase tracking-widest text-sm shadow-xl shadow-pink-500/20"
+        className="px-8 md:px-12 py-4 bg-pink-gradient rounded-full text-black font-bold uppercase tracking-widest text-xs md:text-sm shadow-xl shadow-pink-500/20"
       >
         APLICA AHORA
       </motion.button>
