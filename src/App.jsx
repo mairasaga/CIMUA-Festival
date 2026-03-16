@@ -160,7 +160,7 @@ const App = () => {
         )}
 
         {/* --- BLOQUE DE TEXTO (Subido con margen negativo en móvil) --- */}
-        <div className="mx-auto md:ml-auto md:mr-[8%]" style={{ 
+        <div className="mx-auto md:ml-auto md:mr-[2%]" style={{ 
           position: 'relative',
           zIndex: 10,
           width: '95%', 
