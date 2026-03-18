@@ -53,7 +53,14 @@ const Calendar = () => {
         <span className="text-xl font-bold text-gray-500">2026</span>
       </div>
       <div className="flex items-baseline gap-4 mb-16">
-        <h3 className="text-7xl md:text-9xl font-display text-white uppercase tracking-tighter">Septiembre</h3>
+        <h3 
+          style={{
+            fontSize: typeof window !== 'undefined' && window.innerWidth < 768 ? '14vw' : ''
+          }}
+          className="text-7xl md:text-9xl font-display text-white uppercase tracking-tighter"
+        >
+          Septiembre
+        </h3>
         <div className="h-1 flex-1 bg-white/10 hidden md:block"></div>
       </div>
       
@@ -353,41 +360,116 @@ const App = () => {
     </div>
   </motion.div>
 </section>
-
-      {/* --- NAVEGACIÓN --- */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-md px-6 py-6 border-b border-white/5 flex items-center justify-between">
-          <div className="font-display text-5xl tracking-tighter text-white">CIMUA</div>
+{/* --- NAVEGACIÓN --- */}
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-md px-6 py-4 border-b border-white/5">
+        <div className="max-w-7xl mx-auto flex items-center justify-between">
+          
+          {/* LOGO EN EL MENÚ (Click para subir al inicio) */}
+          <div 
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} 
+            style={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }}
+          >
+            <img 
+              src="/cimua_assets/CIMUA_blanco.png" 
+              alt="CIMUA Logo"
+              style={{
+                height: typeof window !== 'undefined' && window.innerWidth < 768 ? '35px' : '45px', 
+                width: 'auto',
+                display: 'block'
+              }} 
+            />
+          </div>
+          
           <div className="hidden md:flex gap-12 text-base font-normal tracking-[0.2em] uppercase text-white">
             {['Festival', 'Nosotrxs', 'Calendario', 'Convocatoria'].map((item) => (
-              <button key={item} onClick={() => scrollToSection(item.toLowerCase())} className="hover:text-pink-400 transition-colors">{item}</button>
+              <button 
+                key={item} 
+                onClick={() => scrollToSection(item.toLowerCase())} 
+                className="hover:text-pink-400 transition-colors"
+              >
+                {item}
+              </button>
             ))}
           </div>
+
           <button className="md:hidden text-white" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
             {mobileMenuOpen ? <X /> : <Menu />}
           </button>
+        </div>
       </nav>
 
+      {/* --- MENÚ MÓVIL DESPLEGABLE --- */}
       <AnimatePresence>
         {mobileMenuOpen && (
-          <motion.div initial={{ x: '100%' }} animate={{ x: 0 }} exit={{ x: '100%' }} className="fixed inset-0 z-[60] bg-black p-12 flex flex-col gap-8 text-4xl text-white font-display uppercase">
-            <button onClick={() => setMobileMenuOpen(false)} className="absolute top-6 right-6"><X size={32}/></button>
+          <motion.div 
+            initial={{ x: '100%' }} 
+            animate={{ x: 0 }} 
+            exit={{ x: '100%' }} 
+            className="fixed inset-0 z-[60] bg-black p-12 flex flex-col gap-8 text-4xl text-white font-display uppercase"
+          >
+            <button onClick={() => setMobileMenuOpen(false)} className="absolute top-6 right-6">
+              <X size={32}/>
+            </button>
+
+            {/* Opcional: Logo pequeño también dentro del menú abierto */}
+            <img 
+              src="/cimua_assets/CIMUA_blanco.png" 
+              alt="Logo" 
+              style={{ height: '30px', width: 'auto', marginBottom: '20px', alignSelf: 'flex-start' }} 
+            />
+
             {['Festival', 'Nosotrxs', 'Calendario', 'Convocatoria'].map((item) => (
-              <button key={item} onClick={() => scrollToSection(item.toLowerCase())} className="text-left">{item}</button>
+              <button 
+                key={item} 
+                onClick={() => scrollToSection(item.toLowerCase())} 
+                className="text-left"
+              >
+                {item}
+              </button>
             ))}
           </motion.div>
         )}
       </AnimatePresence>
-
-      {/* --- FOOTER --- */}
+{/* --- FOOTER --- */}
       <footer className="py-32 px-6 border-t border-white/5">
         <div className="max-w-7xl mx-auto text-center text-white">
-          <h1 className="text-[15vw] font-display uppercase leading-[0.8] tracking-tighter mb-4">CIMUA</h1>
-          <p className="text-xs font-bold uppercase tracking-[0.4em] opacity-60">Cine, Música y Audiovisual</p>
+          
+          {/* REEMPLAZO: Imagen del logo en lugar de texto */}
+          <div className="flex justify-center mb-6">
+            <img 
+              src="/cimua_assets/CIMUA_blanco.png" // <--- Asegúrate que el nombre y ruta sean exactos
+              alt="CIMUA Logo"
+              style={{
+                width: '100%',
+                maxWidth: '800px', // Tamaño máximo en PC
+                height: 'auto',
+                display: 'block',
+                opacity: 0.9
+              }}
+            />
+          </div>
+
+          <p className="text-xs font-bold uppercase tracking-[0.4em] opacity-60">
+            Cine, Música y Audiovisual
+          </p>
+          
           <div className="mt-20 flex flex-col md:flex-row justify-between items-center gap-8 text-[10px] font-bold uppercase tracking-widest opacity-40">
             <span>© 2026 CIMUA Festival</span>
             <div className="flex gap-8">
-              <a href="https://www.instagram.com/cimua.fest" target="_blank" rel="noopener noreferrer">Instagram</a>
-              <a href="mailto:direcciongral@cimua.com.mx">Contact</a>
+              <a 
+                href="https://www.instagram.com/cimua.fest" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="hover:opacity-100 transition-opacity"
+              >
+                Instagram
+              </a>
+              <a 
+                href="mailto:direcciongral@cimua.com.mx"
+                className="hover:opacity-100 transition-opacity"
+              >
+                Contact
+              </a>
             </div>
           </div>
         </div>
